@@ -1,0 +1,8 @@
+.light-rays-container {
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+}
