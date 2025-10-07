@@ -1,10 +1,22 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { CardBody, CardContainer, CardItem } from "../components/ui/3d-card";
 
 export default function ReefRiskDashboard() {
   const [reefs, setReefs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Random coral reef images
+  const reefImages = [
+    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+    "https://images.unsplash.com/photo-1505761671935-60b3a7427bad",
+    "https://images.unsplash.com/photo-1517832207067-4db24a2ae47c",
+    "https://images.unsplash.com/photo-1501004318641-b39e6451bec6",
+    "https://images.unsplash.com/photo-1505765050516-f72dcac9c60b",
+    "https://images.unsplash.com/photo-1564866657314-2d31d89b9e2d",
+  ];
 
   useEffect(() => {
     const fetchReefData = async () => {
@@ -20,71 +32,83 @@ export default function ReefRiskDashboard() {
     };
 
     fetchReefData();
-    // Optional: refresh every 10 minutes
     const interval = setInterval(fetchReefData, 10 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
 
   if (loading) {
-    return (
-      <div className="text-center text-gray-500 mt-10">
-        🌊 Fetching real-time reef data...
-      </div>
-    );
+    return <div className="text-center text-blue-300 mt-10">🌊 Fetching real-time reef data...</div>;
   }
 
   if (error) {
-    return (
-      <div className="text-center text-red-500 mt-10">
-        ❌ {error}
-      </div>
-    );
+    return <div className="text-center text-red-400 mt-10">❌ {error}</div>;
   }
 
   return (
-    <div className="mt-10 bg-white rounded-2xl shadow-xl p-6">
-      <h2 className="text-2xl font-semibold text-blue-600 mb-6 text-center">
+    <div className="mt-10 p-8 min-h-screen bg-gradient-to-br  text-white">
+      <h2 className="text-3xl font-bold text-center text-blue-400 mb-0">
         🌍 Global Coral Bleaching Risk Monitor
       </h2>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {reefs.map((reef, index) => (
-          <div
-            key={index}
-            className="bg-blue-50 border border-blue-200 rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow"
-          >
-            <h3 className="text-lg font-bold text-blue-700 mb-1">{reef.reef}</h3>
-            <p className="text-sm text-gray-600 mb-2">
-              📍 Coordinates: [{reef.coordinates[0]}, {reef.coordinates[1]}]
-            </p>
+      {/* Grid layout with spacing between cards */}
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-96 gap-y-10 mb-10">
+        {/* ↑ gap-x controls horizontal spacing; gap-y controls vertical spacing */}
 
-            <p className="text-base mb-1">
-              <strong>Bleaching Risk:</strong>{" "}
-              <span
-                className={`font-semibold ${
-                  reef.bleaching_risk === "Severe"
-                    ? "text-red-600"
-                    : reef.bleaching_risk === "Moderate"
-                    ? "text-yellow-600"
-                    : "text-green-600"
-                }`}
-              >
-                {reef.bleaching_risk}
-              </span>
-            </p>
+        {reefs.map((reef, index) => {
+          const image = reefImages[index % reefImages.length];
+          return (
+            <CardContainer key={index}>
+              <CardBody className="relative group/card bg-gray-900 border border-blue-800/40 rounded-2xl shadow-lg hover:shadow-blue-500/30 transition-all duration-300 p-6">
+                <CardItem
+                  translateZ="70"
+                  className="text-xl font-semibold text-blue-300"
+                >
+                  {reef.reef}
+                </CardItem>
 
-            <p className="text-sm text-gray-600 mb-2">
-              Confidence: {(reef.probability * 100).toFixed(1)}%
-            </p>
+                <CardItem as="p" translateZ="60" className="text-gray-400 text-sm mt-2">
+                  📍 Coordinates: [{reef.coordinates[0]}, {reef.coordinates[1]}]
+                </CardItem>
 
-            <div className="bg-white p-3 rounded-lg border border-gray-200 text-sm">
-              <p>🌡️ Temp (max): {reef.factors.temperature_2m_max.toFixed(2)} °C</p>
-              <p>☀️ UV Index (max): {reef.factors.uv_index_max.toFixed(2)}</p>
-              <p>💨 Wind Speed (max): {reef.factors.wind_speed_10m_max.toFixed(2)} km/h</p>
-              <p>🌧️ Precipitation: {reef.factors.precipitation_sum.toFixed(2)} mm</p>
-            </div>
-          </div>
-        ))}
+                <CardItem translateZ="120" className="mt-4 rounded-lg overflow-hidden">
+                  <img
+                    src={image}
+                    alt={reef.reef}
+                    className="h-48 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+                  />
+                </CardItem>
+
+                <div className="mt-5 space-y-2">
+                  <p>
+                    <strong>Bleaching Risk:</strong>{" "}
+                    <span
+                      className={`font-semibold ${
+                        reef.bleaching_risk === "Severe"
+                          ? "text-red-500"
+                          : reef.bleaching_risk === "Moderate"
+                          ? "text-yellow-400"
+                          : "text-green-400"
+                      }`}
+                    >
+                      {reef.bleaching_risk}
+                    </span>
+                  </p>
+
+                  <p className="text-sm text-gray-400">
+                    Confidence: {(reef.probability * 100).toFixed(1)}%
+                  </p>
+
+                  <div className="bg-gray-800 p-3 rounded-lg border border-blue-800/40 text-sm mt-4 space-y-1">
+                    <p>🌡️ Temp (max): {reef.factors.temperature_2m_max.toFixed(2)} °C</p>
+                    <p>☀️ UV Index (max): {reef.factors.uv_index_max.toFixed(2)}</p>
+                    <p>💨 Wind Speed (max): {reef.factors.wind_speed_10m_max.toFixed(2)} km/h</p>
+                    <p>🌧️ Precipitation: {reef.factors.precipitation_sum.toFixed(2)} mm</p>
+                  </div>
+                </div>
+              </CardBody>
+            </CardContainer>
+          );
+        })}
       </div>
     </div>
   );
