@@ -10,11 +10,11 @@ export default function ReefRiskDashboard() {
 
   // Random coral reef images
   const reefImages = [
-    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
-    "https://images.unsplash.com/photo-1505761671935-60b3a7427bad",
-    "https://images.unsplash.com/photo-1517832207067-4db24a2ae47c",
-    "https://images.unsplash.com/photo-1501004318641-b39e6451bec6",
-    "https://images.unsplash.com/photo-1505765050516-f72dcac9c60b",
+    "https://www.relaxingjourneys.co.nz/wp-content/uploads/2024/10/the-great-barrier-reef.jpg",
+    "https://faw-marketing.transforms.svdcdn.com/production/images/Healthy-Coral-and-Fish.jpg?w=1072&h=715&auto=compress%2Cformat&fit=crop&crop=focalpoint&fp-x=0.3776&fp-y=0.4151&dm=1547312255&s=ff62bdb7c8b2395aa01fdc68089aeb08",
+    "https://images.indianexpress.com/2017/03/coral-reef-759.jpg?w=414",
+    "https://files.worldwildlife.org/wwfcmsprod/images/Bottlenose_Dolphin_Belize_Reef/story_full_width/9igt6szp0c_Large_WW22277.jpg",
+    "https://static-cdn.toi-media.com/www/uploads/2024/11/DSC04479.jpg",
     "https://images.unsplash.com/photo-1564866657314-2d31d89b9e2d",
   ];
 
@@ -45,9 +45,9 @@ export default function ReefRiskDashboard() {
   }
 
   return (
-    <div className="mt-10 p-8 min-h-screen bg-gradient-to-br  text-white">
+    <div className="mt-10 p-8 min-h-screen bg-gradient-to-br  text-white playfair-display-small-400">
       <h2 className="text-3xl font-bold text-center text-blue-400 mb-0">
-        🌍 Global Coral Bleaching Risk Monitor
+        Global Coral Bleaching Risk Monitor
       </h2>
 
       {/* Grid layout with spacing between cards */}

@@ -45,13 +45,13 @@ export default function CoralAnalyzer() {
 
   return (
     <motion.div
-      className="max-w-3xl mx-auto mt-12 bg-gradient-to-br from-gray-900 to-blue-950 rounded-3xl shadow-2xl p-8 border border-blue-800 text-white"
+      className="playfair-display-small-400 max-w-3xl mx-auto mt-12 bg-gradient-to-br from-gray-900 to-blue-950 rounded-3xl shadow-2xl p-8 border border-blue-800 text-white"
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
       <h2 className="text-3xl font-bold text-center mb-8 text-blue-400 tracking-wide">
-        Coral Health + Bleaching Severity Analysis
+        Coral Reef Analysis
       </h2>
 
       {/* Image upload + preview */}

@@ -3,25 +3,18 @@ import CoralAnalyzer from "./components/CoralAnalyzer";
 import ReefRiskDashboard from "./components/ReefRiskDashboard";
 import TextType from "./components/TextType/TextType";
 import "./global.css";
-import Prism from './components/Prism/Prism';
+import Aurora from './components/Aurora/Aurora';
 
 export default function App() {
   return (
     <div className="relative min-h-screen w-full">
       {/* Prism background: full screen, behind everything */}
-      <Prism
-        animationType="rotate"
-        timeScale={0.5}
-        height={3.5}
-        baseWidth={5.5}
-        scale={3.6}
-        hueShift={0}
-        colorFrequency={1}
-        noise={0.5}
-        glow={1}
-        transparent={true}
+      <Aurora
+        colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
+        blend={0.5}
+        amplitude={1.0}
+        speed={0.5}
       />
-
       {/* Foreground content */}
       <div className="relative z-10 p-6">
         {/* Fonts */}
@@ -41,7 +34,7 @@ export default function App() {
           showCursor={true}
           cursorCharacter=""
           className="font-bold mb-10 text-center playfair-display-400"
-          textColors={["#1E40AF", "#047857", "#B91C1C"]}
+          textColors={["#FFFFFF"]}
         />
 
         {/* Main content */}
